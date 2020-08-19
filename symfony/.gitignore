@@ -5,7 +5,7 @@
 /.env.*.local
 /app/config/secrets/prod/prod.decrypt.private.php
 /app/public/bundles/
-/var/
+/app/var/
 /vendor/
 /.data/
 /.idea/

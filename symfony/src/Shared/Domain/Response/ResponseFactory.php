@@ -46,6 +46,17 @@ final class ResponseFactory
             );
         }
 
+        if ($responseType->isXML()) {
+            return new XmlResponse(
+                $responseType,
+                $responseSuccess,
+                $responseData,
+                $responseMessage,
+                $responseCode,
+                $responseError
+            );
+        }
+
         throw new ContentTypeNotFound($type);
     }
 }

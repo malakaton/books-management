@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BooksManagement\Book\Application\Create;
 
-final class CreateBookCommand
+use BooksManagement\Shared\Domain\Command;
+
+final class CreateBookCommand implements Command
 {
     private string $authorUuid;
     private string $title;

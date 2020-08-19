@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BooksManagement\Book\Application\Find;
 
-final class FindBookCommand
+use BooksManagement\Shared\Domain\Command;
+
+final class FindBookCommand implements Command
 {
     private string $id;
 

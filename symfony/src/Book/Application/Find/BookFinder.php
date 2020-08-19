@@ -20,12 +20,12 @@ final class BookFinder
     }
 
     /**
-     * @param BookUuid $id
-     * @return Book
+     * @param BookUuid $uuid
+     * @return ?Book
      * @throws BookNotFound
      */
-    public function __invoke(BookUuid $id)
+    public function find(BookUuid $uuid): ?Book
     {
-        return $this->finder->__invoke($id);
+        return $this->finder->__invoke($uuid);
     }
 }

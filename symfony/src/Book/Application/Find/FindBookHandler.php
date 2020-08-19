@@ -25,7 +25,7 @@ final class FindBookHandler implements MessageHandlerInterface
     public function __invoke(FindBookCommand $command): BookDomainResponse
     {
         return (new BookResponseConverter())->__invoke(
-            $this->bookFinder->__invoke(new BookUuid($command->id()))
+            $this->bookFinder->find(new BookUuid($command->id()))
         );
     }
 }

@@ -17,10 +17,10 @@ final class BookFinder
 
     /**
      * @param BookUuid $uuid
-     * @return Book
+     * @return ?Book
      * @throws BookNotFound
      */
-    public function __invoke(BookUuid $uuid): Book
+    public function __invoke(BookUuid $uuid): ?Book
     {
         $book = $this->repository->search($uuid);
 

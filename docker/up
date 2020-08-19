@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+docker-compose up --build -d
+docker-compose exec php rm -R app/var
+docker-compose exec composer install

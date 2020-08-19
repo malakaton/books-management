@@ -1,0 +1,50 @@
+{
+    "name": "malakaton/symfony-ddd-books-management",
+    "license": "proprietary",
+    "type": "project",
+    "keywords": ["symfony", "ddd", "books", "sample app"],
+    "description": "Books management, a sample application on Symfony 5 built with DDD in mind.",
+    "autoload": {
+        "psr-4": {
+            "BooksManagement\\": "src/",
+            "BooksManagement\\App\\": "app/src/"
+        },
+        "classmap": [
+            "app/src/Kernel.php"
+        ]
+    },
+    "require": {
+        "php": "^7.4",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "ext-json": "*",
+        "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/orm": "^2.7",
+        "phpdocumentor/reflection-docblock": "^5.2",
+        "ramsey/uuid": "^4.1",
+        "symfony/console": "5.1.*",
+        "symfony/dependency-injection": "5.1.*",
+        "symfony/dotenv": "5.1.*",
+        "symfony/flex": "^1.3.1",
+        "symfony/framework-bundle": "5.1.*",
+        "symfony/messenger": "5.1.*",
+        "symfony/property-access": "5.1.*",
+        "symfony/property-info": "5.1.*",
+        "symfony/serializer": "5.1.*",
+        "symfony/validator": "5.1.*",
+        "symfony/yaml": "5.1.*"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    }
+}

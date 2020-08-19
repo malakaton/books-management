@@ -1,0 +1,11 @@
+book_get_by_id:
+  path: /book/{id}
+  controller: BooksManagement\Book\EntryPoint\Http\Controller\GetBookByIdController
+  defaults: { auth: false }
+  methods:  [GET|HEAD]
+
+book_store:
+  path: /book
+  controller: BooksManagement\Book\EntryPoint\Http\Controller\CreateBookController
+  defaults: { auth: false }
+  methods:  [POST]

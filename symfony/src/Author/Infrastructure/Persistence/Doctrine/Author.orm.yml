@@ -1,0 +1,17 @@
+BooksManagement\Author\Domain\Author:
+  type:  entity
+  table: authors
+
+  id:
+    uuid:
+      type: author_uuid
+      column: uuid
+      length: 36
+
+  embedded:
+    name:
+      class: BooksManagement\Author\Domain\AuthorName
+      columnPrefix: false
+    surname:
+      class: BooksManagement\Author\Domain\AuthorSurname
+      columnPrefix: false

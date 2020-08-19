@@ -1,0 +1,7 @@
+BooksManagement\Author\Domain\AuthorName:
+  type: embeddable
+
+  fields:
+    value:
+      type: string
+      column: name

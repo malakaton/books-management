@@ -1,0 +1,7 @@
+BooksManagement\Book\Domain\BookTitle:
+  type: embeddable
+
+  fields:
+    value:
+      type: string
+      column: title

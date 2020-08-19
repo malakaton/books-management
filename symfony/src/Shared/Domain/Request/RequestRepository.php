@@ -6,5 +6,5 @@ namespace BooksManagement\Shared\Domain\Request;
 
 interface RequestRepository
 {
-    public function __invoke(RequestContent $content): array;
+    public function __toArray(): array;
 }

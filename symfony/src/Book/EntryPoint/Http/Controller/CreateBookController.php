@@ -7,8 +7,8 @@ namespace BooksManagement\Book\EntryPoint\Http\Controller;
 use BooksManagement\Book\Application\Create\CreateBookCommand;
 use BooksManagement\Book\Domain\BookUuid;
 use BooksManagement\Shared\Domain\ContentTypeNotFound;
-use BooksManagement\Shared\Domain\Request\RequestFactory;
-use BooksManagement\Shared\Domain\Response\ResponseFactory;
+use BooksManagement\Shared\Infrastructure\Symfony\Request\RequestFactory;
+use BooksManagement\Shared\Infrastructure\Symfony\Response\ResponseFactory;
 use BooksManagement\Shared\Infrastructure\Symfony\Exception\SymfonyException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,7 +60,9 @@ final class CreateBookController
      */
     private function parseToArray(Request $request): array
     {
-        return RequestFactory::basedOn($request->getContentType(), $request->getContent());
+        $domainRequest = RequestFactory::basedOn($request->getContentType(), $request->getContent());
+
+        return $domainRequest->__toArray();
     }
 
     /**

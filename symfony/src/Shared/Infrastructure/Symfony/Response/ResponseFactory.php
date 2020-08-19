@@ -2,10 +2,17 @@
 
 declare(strict_types=1);
 
-namespace BooksManagement\Shared\Domain\Response;
+namespace BooksManagement\Shared\Infrastructure\Symfony\Response;
 
 use BooksManagement\Shared\Domain\ContentType;
 use BooksManagement\Shared\Domain\ContentTypeNotFound;
+use BooksManagement\Shared\Domain\Response\Response;
+use BooksManagement\Shared\Domain\Response\ResponseCode;
+use BooksManagement\Shared\Domain\Response\ResponseData;
+use BooksManagement\Shared\Domain\Response\ResponseErrors;
+use BooksManagement\Shared\Domain\Response\ResponseMessage;
+use BooksManagement\Shared\Domain\Response\ResponseRepository;
+use BooksManagement\Shared\Domain\Response\ResponseSuccess;
 
 final class ResponseFactory
 {
@@ -35,26 +42,21 @@ final class ResponseFactory
         $responseCode = new ResponseCode($code);
         $responseError = new ResponseErrors($error);
 
+        $response = Response::create(
+            $responseType,
+            $responseSuccess,
+            $responseData,
+            $responseMessage,
+            $responseCode,
+            $responseError
+        );
+
         if ($responseType->isJSON()) {
-            return new JsonResponse(
-                $responseType,
-                $responseSuccess,
-                $responseData,
-                $responseMessage,
-                $responseCode,
-                $responseError
-            );
+            return new ToJsonContentType($response);
         }
 
         if ($responseType->isXML()) {
-            return new XmlResponse(
-                $responseType,
-                $responseSuccess,
-                $responseData,
-                $responseMessage,
-                $responseCode,
-                $responseError
-            );
+            return new ToXmlContentType($response);
         }
 
         throw new ContentTypeNotFound($type);

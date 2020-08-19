@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BooksManagement\Shared\Infrastructure\Symfony\Exception;
 
 use BooksManagement\Shared\Domain\ContentType;
-use BooksManagement\Shared\Domain\Response\ResponseFactory;
+use BooksManagement\Shared\Infrastructure\Symfony\Response\ResponseFactory;
 use BooksManagement\Shared\Domain\ContentTypeNotFound;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;

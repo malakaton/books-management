@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BooksManagement\Book\Application\Find;
 
 use BooksManagement\Shared\Domain\DomainResponse;
-use BooksManagement\Shared\Domain\Response\ResponseFactory;
+use BooksManagement\Shared\Infrastructure\Symfony\Response\ResponseFactory;
 use BooksManagement\Shared\Domain\ContentTypeNotFound;
 use BooksManagement\Shared\Domain\Response\ResponseRepository;
 use Symfony\Component\HttpFoundation\Response;

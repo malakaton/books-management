@@ -6,7 +6,7 @@ namespace BooksManagement\Shared\Domain\Response;
 
 use BooksManagement\Shared\Domain\ContentType;
 
-abstract class Response
+final class Response
 {
     private ContentType $type;
     private ResponseSuccess $success;
@@ -30,6 +30,18 @@ abstract class Response
         $this->code = $code;
         $this->message = $message;
         $this->errors = $errors;
+    }
+
+    public static function create(
+        ContentType $type,
+        ResponseSuccess $success,
+        ResponseData $data,
+        ResponseMessage $message,
+        ResponseCode $code,
+        ResponseErrors $errors
+    ): Response
+    {
+        return new self($type, $success, $data, $message, $code, $errors);
     }
 
     public function type(): ContentType

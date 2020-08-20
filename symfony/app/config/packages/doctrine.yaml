@@ -15,13 +15,13 @@ doctrine:
     auto_mapping: true
     mappings:
       Book:
-        type: yml
+        type: xml
         dir: "%kernel.project_dir%/../src/Book/Infrastructure/Persistence/Doctrine"
         is_bundle: false
         prefix: 'BooksManagement\Book\Domain'
         alias: BooksManagement\Book\Domain
       Author:
-        type: yml
+        type: xml
         dir: "%kernel.project_dir%/../src/Author/Infrastructure/Persistence/Doctrine"
         is_bundle: false
         prefix: 'BooksManagement\Author\Domain'

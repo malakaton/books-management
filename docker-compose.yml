@@ -75,3 +75,4 @@ services:
 
 networks:
     elk_stack:
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="BooksManagement\Book\Domain\Book" table="books">
+        <id name="uuid" type="book_uuid" column="uuid" length="36" />
+
+        <field name="authorUuid" type="author_uuid" column="author_uuid" />
+
+        <embedded name="title"
+                  class="BooksManagement\Book\Domain\BookTitle"
+                  use-column-prefix="false" />
+
+        <embedded name="description"
+                  class="BooksManagement\Book\Domain\BookDescription"
+                  use-column-prefix="false" />
+
+        <embedded name="content"
+                  class="BooksManagement\Book\Domain\BookContent"
+                  use-column-prefix="false" />
+
+    </entity>
+
+</doctrine-mapping>

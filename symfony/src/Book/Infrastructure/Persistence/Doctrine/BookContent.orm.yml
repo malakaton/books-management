@@ -1,7 +1,0 @@
-BooksManagement\Book\Domain\BookContent:
-  type: embeddable
-
-  fields:
-    value:
-      type: string
-      column: content

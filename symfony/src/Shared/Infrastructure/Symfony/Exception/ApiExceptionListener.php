@@ -38,6 +38,10 @@ final class ApiExceptionListener
             $message['errors']
         );
 
-        $event->setResponse(new Response($response->getContent(), Response::HTTP_OK, $response->getHeader()));
+        $event->setResponse(new Response(
+            $response->getContent(),
+            $exception->getCode() > 0 ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR,
+            $response->getHeader())
+        );
     }
 }

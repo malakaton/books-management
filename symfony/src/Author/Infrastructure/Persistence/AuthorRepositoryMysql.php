@@ -12,13 +12,11 @@ use Doctrine\Persistence\ObjectRepository;
 
 final class AuthorRepositoryMysql implements AuthorRepository
 {
-    private EntityManagerInterface $entityManager;
     private ObjectRepository $repository;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
-        $this->repository = $this->entityManager->getRepository(Author::class);
+        $this->repository = $entityManager->getRepository(Author::class);
     }
 
     public function search(AuthorUuid $authorUuid): ?Author

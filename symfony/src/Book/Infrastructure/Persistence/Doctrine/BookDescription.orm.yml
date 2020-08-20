@@ -1,7 +1,0 @@
-BooksManagement\Book\Domain\BookDescription:
-  type: embeddable
-
-  fields:
-    value:
-      type: string
-      column: description

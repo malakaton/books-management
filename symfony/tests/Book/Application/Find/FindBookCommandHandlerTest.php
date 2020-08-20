@@ -6,29 +6,29 @@ namespace BooksManagement\Tests\Book\Application\Find;
 
 use BooksManagement\Book\Application\Find\BookFinder;
 use BooksManagement\Book\Application\Find\FindBookHandler;
-use BooksManagement\Book\Domain\BookRepository;
+use BooksManagement\Shared\Domain\ContentTypeNotFound;
+use BooksManagement\Shared\Infrastructure\Symfony\Response\ToJsonContentType;
 use BooksManagement\Tests\Book\Domain\BookMother;
-use BooksManagement\Tests\Mocks\Books\BookRepositoryMock;
-use BooksManagement\Tests\Mocks\Books\BooksModuleUnitTestCase;
+use BooksManagement\Tests\Mocks\Books\BooksRepositoryMockUnitTestCase;
 
-final class FindBookCommandHandlerTest extends BooksModuleUnitTestCase
+final class FindBookCommandHandlerTest extends BooksRepositoryMockUnitTestCase
 {
     private FindBookHandler $handler;
-    private BookRepositoryMock $mockedRepository;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->mockedRepository = new BookRepositoryMock($this->prophesize(BookRepository::class));
-        $this->handler = new FindBookHandler(new BookFinder($this->mockedRepository->reveal()));
+        $this->handler = new FindBookHandler(new BookFinder($this->MockRepository()));
     }
 
-    /** @test
+    /**
+     * @test
+     * @throws ContentTypeNotFound
      */
     public function it_should_find_a_book(): void
     {
-        $command = FindBookCommandMother::random();
+        $command = FindBookCommandMother::create($this->randomBookUuid);
 
         $book = BookMother::random($command->id());
 
@@ -40,8 +40,22 @@ final class FindBookCommandHandlerTest extends BooksModuleUnitTestCase
             $book->content()
         );
 
-        $this->mockedRepository->shouldFind($book->uuid(), $book);
+        $this->shouldSearch($book->uuid(), $book);
+
+        $domainResponseToJson = $domainResponse->getResponseByContentType('json');
 
         self::assertEquals($domainResponse, $this->dispatch($command, $this->handler));
+        self::assertIsArray($domainResponse->toArray());
+        self::assertEquals(
+            $domainResponse->toArray(),
+            [
+                'uuid' => $domainResponse->uuid(),
+                'author_uuid' => $domainResponse->authorUuid(),
+                'title' => $domainResponse->title(),
+                'description' => $domainResponse->description(),
+                'content' => $domainResponse->content()
+            ]
+        );
+        self::assertInstanceOf(ToJsonContentType::class, $domainResponseToJson);
     }
 }

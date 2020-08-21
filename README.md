@@ -92,7 +92,7 @@ Run tests
 docker/test
 ```
 
-You can see reports on, http://symfony.localhost:80/reports/
+You can see reports on, http://symfony.localhost:80
 
 
 ![Alt Text](https://64.media.tumblr.com/723987e60ebfffeb744f84fa92e52245/tumblr_neglojBBbo1sx56xso1_400.gif)

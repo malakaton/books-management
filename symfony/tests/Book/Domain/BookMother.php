@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace BooksManagement\Tests\Book\Domain;
-
 
 use BooksManagement\Book\Application\Create\CreateBookCommand;
 use BooksManagement\Book\Domain\Book;

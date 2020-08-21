@@ -9,9 +9,9 @@ use BooksManagement\Shared\Domain\Author\AuthorUuid;
 
 final class AuthorFinder
 {
-    private BookRepository $repository;
+    private AuthorRepository $repository;
 
-    public function __construct(BookRepository $repository)
+    public function __construct(AuthorRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -19,7 +19,7 @@ final class AuthorFinder
     /**
      * @param AuthorUuid $uuid
      * @return Author
-     * @throws BookNotFound
+     * @throws AuthorNotFound
      */
     public function __invoke(AuthorUuid $uuid): Author
     {

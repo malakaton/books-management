@@ -38,7 +38,7 @@ final class CreateBookCommandHandlerTest extends BooksRepositoryMockUnitTestCase
 
         $author = AuthorMother::random($book->authorUuid()->value());
 
-        $this->authorRepository->shouldSearchAuthor($author);
+        $this->authorRepository->shouldSearchAuthor($author->uuid(), $author);
         $this->shouldSave($book);
 
         $this->dispatch($command, $this->handler);

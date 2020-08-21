@@ -6,6 +6,7 @@ namespace BooksManagement\Tests\Mocks\Author;
 
 use BooksManagement\Author\Domain\Author;
 use BooksManagement\Author\Domain\AuthorRepository;
+use BooksManagement\Author\Domain\Exception\AuthorNotFound;
 use BooksManagement\Shared\Domain\Author\AuthorUuid;
 use BooksManagement\Tests\Shared\Domain\Auhor\AuthorUuidMother;
 use BooksManagement\Tests\Shared\Infrastructure\PhpUnit\UnitTestCase;
@@ -29,18 +30,27 @@ abstract class AuthorRepositoryMockUnitTestCase extends UnitTestCase
         return AuthorUuidMother::random();
     }
 
-    protected function shouldSearch(Author $author): void
+    protected function shouldSearch(AuthorUuid $uuid, Author $author): void
     {
         $this->MockRepository()
             ->shouldReceive('search')
-            ->with(\Mockery::on(function($uuid) {
-                $this->assertInstanceOf(AuthorUuid::class, $uuid);
-                $this->assertSame($this->randomAuthorUuid->value(), $uuid->value());
+            ->with(\Mockery::on(function($argument) use ($uuid) {
+                $this->assertInstanceOf(AuthorUuid::class, $argument);
+                $this->assertEquals($argument->value(), $uuid->value());
 
                 return true;
             }))
             ->once()
             ->andReturn($author);
+    }
+
+    protected function shouldNotSearch(): void
+    {
+        $this->MockRepository()
+            ->shouldReceive('search')
+            ->withAnyArgs()
+            ->once()
+            ->andReturnNull();
     }
 
     /** @return AuthorRepository|MockInterface */

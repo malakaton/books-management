@@ -17,7 +17,7 @@ use BooksManagement\Shared\Domain\Response\ResponseSuccess;
 final class ResponseFactory
 {
     /**
-     * @param string $type
+     * @param ?string $type
      * @param bool $success
      * @param array $data
      * @param string $message
@@ -27,7 +27,7 @@ final class ResponseFactory
      * @throws ContentTypeNotFound
      */
     public static function basedOn(
-        string $type,
+        ?string $type,
         bool $success,
         array $data,
         string $message,

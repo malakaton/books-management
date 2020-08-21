@@ -9,6 +9,8 @@ use BooksManagement\Tests\Shared\Domain\UuidMother;
 
 final class AuthorUuidMother
 {
+    public const stub_uuid = '70f066f6-1cb7-4c45-97e2-287f0258ba02';
+
     public static function create(string $value): AuthorUuid
     {
         return new AuthorUuid($value);

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace BooksManagement\Tests\Book\Infrastructure\Persistence;
 
 use BooksManagement\Author\Domain\Author;
-use BooksManagement\Book\Application\Create\CreateBookCommand;
-use BooksManagement\Book\Domain\BookDescription;
 use BooksManagement\Book\Domain\BookRepository;
 use BooksManagement\Book\Infrastructure\Persistence\BookRepositoryMysql;
 use BooksManagement\Tests\Book\Domain\BookContentMother;
@@ -34,13 +32,12 @@ final class BookRepositoryTest extends DoctrineInfrastructureTestCase
     /** @test */
     public function it_should_save_a_book(): void
     {
-        $book = BookMother::fromRequest(
-            new CreateBookCommand(
-                $this->author->uuid()->value(),
-                BookTitleMother::random()->value(),
-                BookDescriptionMother::random()->value(),
-                BookContentMother::random()->value()
-            )
+        $book = BookMother::create(
+            BookUuidMother::random(),
+            $this->author->uuid(),
+            BookTitleMother::random(),
+            BookDescriptionMother::random(),
+            BookContentMother::random()
         );
 
         $this->bookRepository->save($book);
@@ -49,13 +46,12 @@ final class BookRepositoryTest extends DoctrineInfrastructureTestCase
     /** @test */
     public function it_should_return_an_existing_book(): void
     {
-        $book = BookMother::fromRequest(
-            new CreateBookCommand(
-                $this->author->uuid()->value(),
-                BookTitleMother::random()->value(),
-                BookDescriptionMother::random()->value(),
-                BookContentMother::random()->value()
-            )
+        $book = BookMother::create(
+            BookUuidMother::random(),
+            $this->author->uuid(),
+            BookTitleMother::random(),
+            BookDescriptionMother::random(),
+            BookContentMother::random()
         );
 
         $this->bookRepository->save($book);

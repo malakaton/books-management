@@ -16,9 +16,9 @@ final class AuthorRepositoryMock extends AuthorRepositoryMockUnitTestCase
         return $this->MockRepository();
     }
 
-    public function shouldSearchAuthor(Author $author): void
+    public function shouldSearchAuthor(AuthorUuid $uuid, Author $author): void
     {
-        $this->shouldSearch($author);
+        $this->shouldSearch($uuid, $author);
     }
 
     public function getAuthorUuid(): AuthorUuid

@@ -9,14 +9,14 @@ final class ContentType
     public const _json = 'json';
     public const _xml = 'xml';
 
-    private string $type;
+    private ?string $type;
 
-    public function __construct(string $type)
+    public function __construct(?string $type)
     {
         $this->type = $type;
     }
 
-    public function value(): string
+    public function value(): ?string
     {
         return $this->type;
     }

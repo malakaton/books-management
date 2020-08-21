@@ -72,11 +72,11 @@ final class BookDomainResponse implements DomainResponse
     }
 
     /**
-     * @param string $contentType
+     * @param ?string $contentType
      * @return ResponseRepository
      * @throws ContentTypeNotFound
      */
-    public function getResponseByContentType(string $contentType): ResponseRepository
+    public function getResponseByContentType(?string $contentType): ResponseRepository
     {
         return ResponseFactory::basedOn(
             $contentType,

@@ -10,12 +10,12 @@ final class ContentTypeNotFound extends \Exception implements DomainException
 {
     /**
      * ContentTypeNotFound constructor.
-     * @param string $type
+     * @param ?string $type
      * @param int $code
      * @param Throwable|null $previous
      * @throws \JsonException
      */
-    public function __construct(string $type, int $code = 404, Throwable $previous = null) {
+    public function __construct(?string $type, int $code = 404, Throwable $previous = null) {
         parent::__construct(
             json_encode([
                 'message' => 'Content-type unsupported',

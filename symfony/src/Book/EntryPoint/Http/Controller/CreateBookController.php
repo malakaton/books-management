@@ -74,7 +74,10 @@ final class CreateBookController
         $constraint = new Assert\Collection(
             [
                 'book' => new Assert\Collection([
-                    'author_uuid'   => new Assert\Uuid(),
+                    'author_uuid'   => [
+                        new Assert\NotBlank(),
+                        new Assert\Uuid()
+                    ],
                     'title'         => [
                         new Assert\NotBlank(),
                         new Assert\Length(['min' => 1, 'max' => 32]),

@@ -8,6 +8,6 @@ final class StringMother
 {
     public static function random(): string
     {
-        return MotherCreator::random()->word;
+        return MotherCreator::random()->text(20);
     }
 }

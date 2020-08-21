@@ -17,13 +17,15 @@ services:
   # this creates a service per class whose id is the fully-qualified class name
   BooksManagement\:
     resource: '../../../src/'
-    exclude:
-      - '../src/Kernel.php'
 
   # controllers are imported separately to make sure they're public
   # and have a tag that allows actions to type-hint services
   BooksManagement\Book\EntryPoint\Http\Controller\:
     resource: '../../../src/Book/EntryPoint/Http/Controller'
+    tags: ['controller.service_arguments']
+
+  BooksManagement\App\Controller\:
+    resource: '../../src/Controller/'
     tags: ['controller.service_arguments']
 
   BooksManagement\Shared\Infrastructure\Symfony\Exception\ApiExceptionListener:

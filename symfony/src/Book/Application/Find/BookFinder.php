@@ -9,14 +9,15 @@ use BooksManagement\Book\Domain\BookUuid;
 use BooksManagement\Book\Domain\BookRepository;
 use BooksManagement\Book\Domain\BookFinder as DomainBookFinder;
 use BooksManagement\Book\Domain\Exception\BookNotFound;
+use Psr\Log\LoggerInterface;
 
 final class BookFinder
 {
     private DomainBookFinder $finder;
 
-    public function __construct(BookRepository $repository)
+    public function __construct(BookRepository $repository, LoggerInterface $logger)
     {
-        $this->finder = new DomainBookFinder($repository);
+        $this->finder = new DomainBookFinder($repository, $logger);
     }
 
     /**

@@ -69,7 +69,7 @@ services:
         volumes:
             - ./docker/elk/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml:cached
             - ./docker/elk/logstash/conf.d:/etc/logstash/conf.d:cached
-            - ./logs/symfony:/var/www/symfony/var/log:cached
+            - ./logs/symfony:/var/www/symfony/app/var/log:cached
             - ./logs/nginx:/var/log/nginx:cached
         networks:
             - elk_stack

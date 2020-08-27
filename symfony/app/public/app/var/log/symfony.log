@@ -1,0 +1,4 @@
+[2020-08-27T17:50:48.537652+02:00] app.ALERT: Book with uuid: 96312891-ead7-4519-85ec-3476f45d9252 not found [] []
+[2020-08-27T17:50:48.538946+02:00] app.CRITICAL: Exception occurred: The book has not been found [] []
+[2020-08-27T17:52:31.851306+02:00] app.ALERT: Book with uuid: 96312891-ead7-4519-85ec-3476f45d9252 not found [] []
+[2020-08-27T17:52:31.852864+02:00] app.CRITICAL: Exception occurred: The book has not been found [] []

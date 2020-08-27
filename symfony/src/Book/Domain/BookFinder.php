@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace BooksManagement\Book\Domain;
 
 use BooksManagement\Book\Domain\Exception\BookNotFound;
+use Psr\Log\LoggerInterface;
 
 final class BookFinder
 {
     private BookRepository $repository;
+    private LoggerInterface $logger;
 
-    public function __construct(BookRepository $repository)
+    public function __construct(BookRepository $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
+        $this->logger = $logger;
     }
 
     /**
@@ -26,6 +29,8 @@ final class BookFinder
 
         $this->guard($uuid, $book);
 
+        $this->logger->info("Book with uuid: {$uuid->value()} found");
+
         return $book;
     }
 
@@ -37,6 +42,7 @@ final class BookFinder
     private function guard(BookUuid $uuid, Book $book = null): void
     {
         if (null === $book) {
+            $this->logger->alert("Book with uuid: {$uuid->value()} not found");
             throw new BookNotFound($uuid->value());
         }
     }

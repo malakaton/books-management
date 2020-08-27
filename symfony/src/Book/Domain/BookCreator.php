@@ -7,16 +7,22 @@ namespace BooksManagement\Book\Domain;
 use BooksManagement\Author\Domain\AuthorRepository;
 use BooksManagement\Author\Domain\Exception\AuthorNotFound;
 use BooksManagement\Shared\Domain\Author\AuthorUuid;
+use Psr\Log\LoggerInterface;
 
 final class BookCreator
 {
     private BookRepository $bookRepository;
     private AuthorRepository $authorRepository;
+    private LoggerInterface $logger;
 
-    public function __construct(BookRepository $bookRepository, AuthorRepository $authorRepository)
-    {
+    public function __construct(
+        BookRepository $bookRepository,
+        AuthorRepository $authorRepository,
+        LoggerInterface $logger
+    ) {
         $this->bookRepository = $bookRepository;
         $this->authorRepository = $authorRepository;
+        $this->logger = $logger;
     }
 
     /**
@@ -40,6 +46,8 @@ final class BookCreator
 
         $this->bookRepository->save($book);
 
+        $this->logger->info("Book created with uuid: {$book->uuid()->value()}");
+
         return $book->uuid();
     }
 
@@ -50,6 +58,7 @@ final class BookCreator
     private function guardAuthorUuid(AuthorUuid $authorUuid): void
     {
         if (!$this->authorRepository->search($authorUuid)) {
+            $this->logger->alert("Author with uuid: {$authorUuid->value()} not found");
             throw new AuthorNotFound($authorUuid->value());
         }
     }

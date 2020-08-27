@@ -13,14 +13,18 @@ use BooksManagement\Author\Domain\AuthorRepository;
 use BooksManagement\Book\Domain\BookCreator as DomainBookCreator;
 use BooksManagement\Book\Domain\BookUuid;
 use BooksManagement\Shared\Domain\Author\AuthorUuid;
+use Psr\Log\LoggerInterface;
 
 final class BookCreator
 {
     private DomainBookCreator $creator;
 
-    public function __construct(BookRepository $bookRepository, AuthorRepository $authorRepository)
-    {
-        $this->creator = new DomainBookCreator($bookRepository, $authorRepository);
+    public function __construct(
+        BookRepository $bookRepository,
+        AuthorRepository $authorRepository,
+        LoggerInterface $logger
+    ) {
+        $this->creator = new DomainBookCreator($bookRepository, $authorRepository, $logger);
     }
 
     /**

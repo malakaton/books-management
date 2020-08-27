@@ -107,9 +107,6 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash \
 #    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
 #    && rm -Rf /tmp/blackfire
 
-# Set USER
-RUN useradd -ms /bin/bash project
-USER project
 WORKDIR /var/www/symfony
 
 #COPY conf/php-fpm.conf /etc/php-fpm.conf

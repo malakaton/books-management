@@ -19,16 +19,16 @@ abstract class ElasticsearchRepository
 
     protected function persist(string $id, array $plainBody): void
     {
-        $this->client->persist($this->aggregateName(), $id, $plainBody);
+        $this->client->persist($this->indexName(), $id, $plainBody);
     }
 
     protected function searchById(string $id): array
     {
-        return $this->client->searchById($this->aggregateName(), $id);
+        return $this->client->searchById($this->indexName(), $id);
     }
 
     protected function indexName(): string
     {
-        return sprintf('%s_%s', $this->client->indexPrefix(), $this->aggregateName());
+        return sprintf('%s-%s', $this->client->indexPrefix(), $this->aggregateName());
     }
 }

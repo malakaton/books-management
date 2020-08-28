@@ -17,22 +17,22 @@ final class ElasticsearchClient
         $this->indexPrefix = $indexPrefix;
     }
 
-    public function persist(string $aggregateName, string $identifier, array $plainBody): void
+    public function persist(string $index, string $identifier, array $plainBody): void
     {
         $this->client->index(
             [
-                'index' => sprintf('%s_%s', $this->indexPrefix, $aggregateName),
+                'index' => $index,
                 'id'    => $identifier,
                 'body'  => $plainBody,
             ]
         );
     }
 
-    public function searchById(string $aggregateName, string $identifier): array
+    public function searchById(string $index, string $identifier): array
     {
         return $this->client->get(
             [
-                'index' => sprintf('%s_%s', $this->indexPrefix, $aggregateName),
+                'index' => $index,
                 'id'    => $identifier
             ]
         );

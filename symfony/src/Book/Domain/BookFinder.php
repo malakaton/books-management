@@ -30,7 +30,7 @@ final class BookFinder
      */
     public function __invoke(BookUuid $uuid): ?Book
     {
-        $book = $this->repository->search($uuid);
+        $book = $this->elasticRepository->search($uuid) ?? $this->repository->search($uuid);
 
         $this->guard($uuid, $book);
 

@@ -28,6 +28,16 @@ final class ElasticsearchClient
         );
     }
 
+    public function searchById(string $aggregateName, string $identifier): array
+    {
+        return $this->client->get(
+            [
+                'index' => sprintf('%s_%s', $this->indexPrefix, $aggregateName),
+                'id'    => $identifier
+            ]
+        );
+    }
+
     public function client(): Client
     {
         return $this->client;

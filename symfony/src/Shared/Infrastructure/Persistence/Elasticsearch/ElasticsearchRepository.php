@@ -21,4 +21,14 @@ abstract class ElasticsearchRepository
     {
         $this->client->persist($this->aggregateName(), $id, $plainBody);
     }
+
+    protected function searchById(string $id): array
+    {
+        return $this->client->searchById($this->aggregateName(), $id);
+    }
+
+    protected function indexName(): string
+    {
+        return sprintf('%s_%s', $this->client->indexPrefix(), $this->aggregateName());
+    }
 }

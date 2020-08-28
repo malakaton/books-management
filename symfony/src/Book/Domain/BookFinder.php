@@ -34,6 +34,11 @@ final class BookFinder
 
         if (is_null($book)) {
             $book = $this->repository->search($uuid);
+
+            if (!is_null($book)) {
+                // Store book on elastic search engine
+                $this->elasticRepository->save($book);
+            }
         }
 
         $this->guard($uuid, $book);
@@ -54,8 +59,5 @@ final class BookFinder
             $this->logger->alert("Book with uuid: {$uuid->value()} not found");
             throw new BookNotFound($uuid->value());
         }
-
-        // Store book on elastic search engine
-        $this->elasticRepository->save($book);
     }
 }

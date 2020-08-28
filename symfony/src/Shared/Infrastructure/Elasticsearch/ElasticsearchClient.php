@@ -30,7 +30,12 @@ final class ElasticsearchClient
 
     public function searchById(string $index, string $identifier): ?array
     {
-        if ($this->client->indices()->exists(['index' => $index])) {
+        if ($this->client->exists(
+            [
+                'index' => $index,
+                'id' => $identifier
+            ]
+        )) {
             return $this->client->get(
                 [
                     'index' => $index,

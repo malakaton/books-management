@@ -57,10 +57,7 @@ services:
             discovery.type: "single-node"
         ports:
             - "9200:9200"
-        networks:
-            elk_stack:
-                aliases:
-                    - "elasticsearch"
+
     logstash:
         container_name: logstash
         image: docker.elastic.co/logstash/logstash:7.4.2
@@ -71,21 +68,13 @@ services:
             - ./docker/elk/logstash/conf.d:/etc/logstash/conf.d:cached
             - ./logs/symfony:/var/www/symfony/app/var/log:cached
             - ./logs/nginx:/var/log/nginx:cached
-        networks:
-            - elk_stack
     kibana:
         container_name: kibana
-        depends_on: 
-            - elasticsearch
         image: docker.elastic.co/kibana/kibana:7.4.2
         environment:
             SERVER_NAME: localhost
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
-        networks:
-            - elk_stack
+        links:
+            - elasticsearch
         ports:
             - "81:5601"
-
-networks:
-    elk_stack:
-

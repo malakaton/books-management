@@ -10,11 +10,16 @@ use Psr\Log\LoggerInterface;
 final class BookFinder
 {
     private BookRepository $repository;
+    private ElasticBookRepository $elasticRepository;
     private LoggerInterface $logger;
 
-    public function __construct(BookRepository $repository, LoggerInterface $logger)
-    {
+    public function __construct(
+        BookRepository $repository,
+        ElasticBookRepository $elasticRepository,
+        LoggerInterface $logger
+    ) {
         $this->repository = $repository;
+        $this->elasticRepository = $elasticRepository;
         $this->logger = $logger;
     }
 

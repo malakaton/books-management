@@ -13,15 +13,18 @@ final class BookCreator
 {
     private BookRepository $bookRepository;
     private AuthorRepository $authorRepository;
+    private ElasticBookRepository $elasticRepository;
     private LoggerInterface $logger;
 
     public function __construct(
         BookRepository $bookRepository,
         AuthorRepository $authorRepository,
+        ElasticBookRepository $elasticRepository,
         LoggerInterface $logger
     ) {
         $this->bookRepository = $bookRepository;
         $this->authorRepository = $authorRepository;
+        $this->elasticRepository = $elasticRepository;
         $this->logger = $logger;
     }
 
@@ -43,6 +46,8 @@ final class BookCreator
         $this->guardAuthorUuid($authorUuid);
 
         $book = Book::create($authorUuid, $title, $description, $content);
+
+        $this->elasticRepository->save($book);
 
         $this->bookRepository->save($book);
 

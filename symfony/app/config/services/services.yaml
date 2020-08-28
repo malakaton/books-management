@@ -31,3 +31,13 @@ services:
   BooksManagement\Shared\Infrastructure\Symfony\Exception\ApiExceptionListener:
     tags:
       - { name: kernel.event_listener, event: kernel.exception}
+
+  BooksManagement\Shared\Infrastructure\Elasticsearch\ElasticsearchClient:
+    factory: '@BooksManagement\Shared\Infrastructure\Elasticsearch\ElasticsearchClientFactory'
+    arguments:
+      - '%env(ELASTICSEARCH_HOST)%'
+      - '%env(ELASTICSEARCH_INDEX_PREFIX)%'
+    public: true
+
+  BooksManagement\Book\Domain\BookRepository: '@BooksManagement\Book\Infrastructure\Persistence\BookRepositoryMysql'
+  BooksManagement\Book\Domain\ElasticBookRepository: '@BooksManagement\Book\Infrastructure\Persistence\BookRepositoryElasticsearch'

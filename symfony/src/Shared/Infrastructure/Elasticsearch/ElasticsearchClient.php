@@ -28,14 +28,18 @@ final class ElasticsearchClient
         );
     }
 
-    public function searchById(string $index, string $identifier): array
+    public function searchById(string $index, string $identifier): ?array
     {
-        return $this->client->get(
-            [
-                'index' => $index,
-                'id'    => $identifier
-            ]
-        );
+        if ($this->client->indices()->exists(['index' => $index])) {
+            return $this->client->get(
+                [
+                    'index' => $index,
+                    'id' => $identifier
+                ]
+            );
+        }
+
+        return null;
     }
 
     public function client(): Client

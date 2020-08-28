@@ -30,7 +30,11 @@ final class BookFinder
      */
     public function __invoke(BookUuid $uuid): ?Book
     {
-        $book = $this->elasticRepository->search($uuid) ?? $this->repository->search($uuid);
+        $book = $this->elasticRepository->search($uuid);
+
+        if (is_null($book)) {
+            $book = $this->repository->search($uuid);
+        }
 
         $this->guard($uuid, $book);
 
@@ -50,5 +54,8 @@ final class BookFinder
             $this->logger->alert("Book with uuid: {$uuid->value()} not found");
             throw new BookNotFound($uuid->value());
         }
+
+        // Store book on elastic search engine
+        $this->elasticRepository->save($book);
     }
 }

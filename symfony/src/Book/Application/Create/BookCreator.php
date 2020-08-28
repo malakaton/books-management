@@ -12,7 +12,6 @@ use BooksManagement\Book\Domain\BookRepository;
 use BooksManagement\Author\Domain\AuthorRepository;
 use BooksManagement\Book\Domain\BookCreator as DomainBookCreator;
 use BooksManagement\Book\Domain\BookUuid;
-use BooksManagement\Book\Domain\ElasticBookRepository;
 use BooksManagement\Shared\Domain\Author\AuthorUuid;
 use Psr\Log\LoggerInterface;
 
@@ -23,10 +22,9 @@ final class BookCreator
     public function __construct(
         BookRepository $bookRepository,
         AuthorRepository $authorRepository,
-        ElasticBookRepository $elasticRepository,
         LoggerInterface $logger
     ) {
-        $this->creator = new DomainBookCreator($bookRepository, $authorRepository, $elasticRepository, $logger);
+        $this->creator = new DomainBookCreator($bookRepository, $authorRepository, $logger);
     }
 
     /**

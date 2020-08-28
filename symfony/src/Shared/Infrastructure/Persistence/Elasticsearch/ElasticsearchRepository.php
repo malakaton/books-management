@@ -22,7 +22,7 @@ abstract class ElasticsearchRepository
         $this->client->persist($this->indexName(), $id, $plainBody);
     }
 
-    protected function searchById(string $id): array
+    protected function searchById(string $id): ?array
     {
         return $this->client->searchById($this->indexName(), $id);
     }

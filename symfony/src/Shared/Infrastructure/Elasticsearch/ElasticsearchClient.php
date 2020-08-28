@@ -17,7 +17,7 @@ final class ElasticsearchClient
         $this->indexPrefix = $indexPrefix;
     }
 
-    public function persist(string $index, string $identifier, array $plainBody): void
+    public function persist(string $index, string $identifier, array $plainBody, string $aggregateName): void
     {
         $this->client->index(
             [
@@ -26,6 +26,21 @@ final class ElasticsearchClient
                 'body'  => $plainBody,
             ]
         );
+
+        if (!$this->client->indices()->existsAlias(['name' => $this->indexPrefix . '-' . $aggregateName])) {
+            $this->client->indices()->updateAliases(
+                [
+                    'body' => [
+                        'actions' => [
+                            'add' => [
+                                'index' => $index,
+                                'alias' => $this->indexPrefix . '-' . $aggregateName
+                            ]
+                        ]
+                    ]
+                ]
+            );
+        }
     }
 
     public function searchById(string $index, string $identifier): ?array

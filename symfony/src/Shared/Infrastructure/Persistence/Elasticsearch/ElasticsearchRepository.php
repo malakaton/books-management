@@ -19,7 +19,7 @@ abstract class ElasticsearchRepository
 
     protected function persist(string $id, array $plainBody): void
     {
-        $this->client->persist($this->indexName(), $id, $plainBody);
+        $this->client->persist($this->indexName(), $id, $plainBody, $this->aggregateName());
     }
 
     protected function searchById(string $id): ?array
@@ -29,6 +29,6 @@ abstract class ElasticsearchRepository
 
     protected function indexName(): string
     {
-        return sprintf('%s-%s', $this->client->indexPrefix(), $this->aggregateName());
+        return sprintf('%s-%s-%s', $this->client->indexPrefix(), $this->aggregateName(), date('Y.m.d'));
     }
 }
